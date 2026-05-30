@@ -1,0 +1,265 @@
+{
+  "name": "rovion-ai",
+  "displayName": "Rovion AI — AI 1인 기업 · 나만의 에이전트 팀 · 제2의 두뇌",
+  "description": "Rovion Inc. — AI 1인 기업가를 위한 워크스페이스. 나만의 AI 에이전트 팀과 제2의 두뇌가 한 곳에서 — CEO + 전문 에이전트들이 내 지식·결정 로그·메모리를 컨텍스트로 24시간 미션 향해 자동으로 일합니다. 100% 로컬·오프라인·무료.",
+  "version": "1.0.0",
+  "publisher": "rovion",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rovion-inc/rovion-ai"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Programming Languages",
+    "Chat"
+  ],
+  "keywords": [
+    "ai",
+    "local",
+    "ollama",
+    "lmstudio",
+    "gemma",
+    "llama",
+    "deepseek",
+    "offline",
+    "agent",
+    "agent-team",
+    "second-brain",
+    "1인기업",
+    "solopreneur",
+    "code-generation",
+    "rovion",
+    "copilot"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "rovion-ai.newChat",
+        "title": "Rovion AI: New Chat",
+        "icon": "$(add)"
+      },
+      {
+        "command": "rovion-ai.openSettings",
+        "title": "Rovion AI: ⚙️ 설정 열기"
+      },
+      {
+        "command": "rovion-ai.exportChat",
+        "title": "Rovion AI: Export Chat as Markdown"
+      },
+      {
+        "command": "rovion-ai.explainSelection",
+        "title": "Rovion AI: Explain Selected Code"
+      },
+      {
+        "command": "rovion-ai.focusChat",
+        "title": "Rovion AI: Focus Chat Input"
+      },
+      {
+        "command": "rovion-ai.showBrainNetwork",
+        "title": "Rovion AI: Show Brain Topology 🧠"
+      },
+      {
+        "command": "rovion-ai.changeCompanyDir",
+        "title": "Rovion AI: 회사 폴더 변경 🏢"
+      },
+      {
+        "command": "rovion-ai.connectCompanyRepo",
+        "title": "Rovion AI: 회사 GitHub 연결 ☁️"
+      },
+      {
+        "command": "rovion-ai.connectGoogleCalendarWrite",
+        "title": "Rovion AI: Google Calendar 자동 일정 연결 📅"
+      },
+      {
+        "command": "rovionAi.tasks.refresh",
+        "title": "할 일 새로고침",
+        "category": "Rovion AI",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "rovionAi.tasks.markDone",
+        "title": "완료 처리",
+        "category": "Rovion AI",
+        "icon": "$(check)"
+      },
+      {
+        "command": "rovionAi.tasks.cancel",
+        "title": "취소",
+        "category": "Rovion AI",
+        "icon": "$(close)"
+      },
+      {
+        "command": "rovionAi.tasks.setPriority",
+        "title": "우선순위 변경",
+        "category": "Rovion AI",
+        "icon": "$(arrow-up)"
+      },
+      {
+        "command": "rovionAi.tasks.openTrackerJson",
+        "title": "tracker.json 열기",
+        "category": "Rovion AI",
+        "icon": "$(file-code)"
+      },
+      {
+        "command": "rovionAi.dailyBriefing.fireNow",
+        "title": "지금 데일리 브리핑 발사",
+        "category": "Rovion AI",
+        "icon": "$(megaphone)"
+      },
+      {
+        "command": "rovionAi.diagnoseConnection",
+        "title": "🔍 LLM 연결 진단 (Ollama / LM Studio)",
+        "category": "Rovion AI",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "rovionAi.youtube.refreshCommentQueue",
+        "title": "YouTube 댓글 답장 큐 갱신",
+        "category": "Rovion AI",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "rovionAi.developer.scaffoldProject",
+        "title": "Developer: 새 프로젝트 만들기",
+        "category": "Rovion AI",
+        "icon": "$(file-directory-create)"
+      },
+      {
+        "command": "rovionAi.skill.saveLast",
+        "title": "방금 산출물 → 스킬로 저장 💎",
+        "category": "Rovion AI",
+        "icon": "$(save)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "rovion-ai-sidebar",
+          "title": "Rovion AI",
+          "icon": "assets/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "rovion-ai-sidebar": [
+        {
+          "type": "webview",
+          "id": "rovion-ai.chatView",
+          "name": "Chat",
+          "icon": "assets/icon.svg",
+          "contextualTitle": "Rovion AI"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Rovion AI",
+      "properties": {
+        "rovionAi.ollamaUrl": {
+          "type": "string",
+          "default": "http://localhost:11434",
+          "description": "Ollama 서버 URL"
+        },
+        "rovionAi.lmStudioUrl": {
+          "type": "string",
+          "default": "http://localhost:1234",
+          "description": "LM Studio 서버 URL"
+        },
+        "rovionAi.llmEngine": {
+          "type": "string",
+          "enum": ["ollama", "lmstudio"],
+          "default": "ollama",
+          "description": "사용할 LLM 엔진"
+        },
+        "rovionAi.defaultModel": {
+          "type": "string",
+          "default": "",
+          "description": "기본 사용 모델명 (비워두면 자동 감지)"
+        },
+        "rovionAi.localBrainPath": {
+          "type": "string",
+          "default": "",
+          "description": "두뇌 폴더 경로 (기본: ~/.rovion-brain/)"
+        },
+        "rovionAi.companyDir": {
+          "type": "string",
+          "default": "",
+          "description": "회사 폴더 경로 (기본: <brain>/_company/)"
+        },
+        "rovionAi.githubToken": {
+          "type": "string",
+          "default": "",
+          "description": "GitHub Personal Access Token (Auto-Git Sync)"
+        },
+        "rovionAi.githubRepo": {
+          "type": "string",
+          "default": "",
+          "description": "GitHub 저장소 (예: username/repo-name)"
+        },
+        "rovionAi.autoGitSync": {
+          "type": "boolean",
+          "default": false,
+          "description": "파일 생성/수정 시 GitHub 자동 동기화"
+        },
+        "rovionAi.dailyBriefingHour": {
+          "type": "number",
+          "default": 9,
+          "description": "데일리 브리핑 시간 (24시간 형식, 기본 9시)"
+        },
+        "rovionAi.youtubeApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "YouTube Data API v3 키 (댓글 자동화)"
+        },
+        "rovionAi.telegramBotToken": {
+          "type": "string",
+          "default": "",
+          "description": "Telegram Bot Token (알림 수신)"
+        },
+        "rovionAi.telegramChatId": {
+          "type": "string",
+          "default": "",
+          "description": "Telegram Chat ID (알림 대상)"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "rovion-ai.explainSelection",
+          "when": "editorHasSelection",
+          "group": "rovion@1"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "rovion-ai.newChat",
+          "when": "view == rovion-ai.chatView",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.0"
+  }
+}

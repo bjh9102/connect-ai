@@ -1,0 +1,76 @@
+{
+  "schema_name": "RovionAI_AgentSystemSchema",
+  "version": "1.0.0",
+  "brand": "Rovion Inc.",
+  "description": "Rovion AI 에이전트 시스템의 운영 상태, 기능, 설정을 정의하는 JSON 스키마.",
+  "agent_identity": {
+    "name": "Rovion AI",
+    "role": "AI 1인 기업 에이전트 팀",
+    "core_principle": "100% Local · 100% Offline · 100% Free",
+    "brand_voice": "전략적·실용적·결과 중심"
+  },
+  "environment": {
+    "brain_path": "~/.rovion-brain/",
+    "company_path": "~/.rovion-brain/_company/",
+    "skills_path": "~/.rovion-brain/🚀 Skills/",
+    "file_system_access": "Ollama/LM Studio를 통한 로컬 오프라인 파일 시스템 접근",
+    "context_source": "로컬 두뇌 폴더 + 선택적 GitHub 지식 베이스"
+  },
+  "knowledge_structure": {
+    "template": "P-Reinforce",
+    "folders": {
+      "10_Wiki": "위키 & 가이드 (구조화된 지식)",
+      "00_Raw": "원본 데이터 (미가공 입력)",
+      "20_Projects": "프로젝트 폴더",
+      "30_Resources": "참고 자료",
+      "40_Archive": "아카이브",
+      "🚀 Skills": "재사용 가능한 스킬 패키지"
+    }
+  },
+  "agent_capabilities": [
+    {
+      "action": "CREATE_FILE",
+      "description": "워크스페이스에 새 파일 및 디렉토리 생성"
+    },
+    {
+      "action": "EDIT_FILE",
+      "description": "기존 파일의 특정 코드 검색 및 교체"
+    },
+    {
+      "action": "DELETE_FILE",
+      "description": "파일 및 폴더 삭제"
+    },
+    {
+      "action": "RUN_TERMINAL",
+      "description": "터미널 명령 실행 (git, npm, python 등)"
+    },
+    {
+      "action": "KNOWLEDGE_STRUCTURE",
+      "description": "P-Reinforce 구조로 지식 자동 분류 및 저장"
+    },
+    {
+      "action": "GIT_SYNC",
+      "description": "GitHub 자동 동기화 (add, commit, push)"
+    },
+    {
+      "action": "MODEL_DETECT",
+      "description": "Ollama/LM Studio 모델 자동 감지"
+    },
+    {
+      "action": "DAILY_BRIEFING",
+      "description": "매일 아침 에이전트 팀 브리핑 생성"
+    }
+  ],
+  "agents": {
+    "ceo": "Chief Executive Agent — 오케스트레이션 & 전략",
+    "youtube": "레오 — 유튜브 채널 운영",
+    "instagram": "소피 — 인스타그램 콘텐츠",
+    "designer": "아트 — 브랜드 & 비주얼 디자인",
+    "developer": "데브 — 코드 & 시스템",
+    "copywriter": "라이터 — 카피 & 글쓰기",
+    "marketing": "마케터 — 마케팅 전략",
+    "brain": "브레인 — 지식 관리"
+  },
+  "llm_engines": ["Ollama", "LM Studio"],
+  "supported_models": ["llama3", "gemma2", "deepseek-r1", "qwen2.5", "mistral", "phi4", "any-openai-compatible"]
+}
